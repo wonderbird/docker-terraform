@@ -7,10 +7,7 @@ Docker image containing Terraform, AWS CLI, Azure CLI and Helm
 
 ## Quick Reference
 
--   **Where to get help**:
-    [Stefan Boos](mailto:kontakt@boos.systems)
-
--   **Where to file issues**:
+-   **Where to get help and where to file issues**:
     [GitHub issue tracker for this container](https://github.com/wonderbird/docker-terraform/issues)
 
 -   **Maintained by**:
@@ -20,7 +17,11 @@ Docker image containing Terraform, AWS CLI, Azure CLI and Helm
     only tested on i386 (macOS Mojave on Intel Core i7), others may work; see base image [hashicorp/terraform](https://hub.docker.com/r/hashicorp/terraform)
 
 -   **Source of this description**:
-    [GitHub README.md for this container](https://github.com/wonderbird/docker-terraform/blob/master/README.md)
+    [GitHub README.md for this container](https://github.com/wonderbird/docker-terraform)
+
+## Scope
+
+This repository contains a docker image I have created in my free time. I am using this docker image for my private pleasure. As of Jan. 20, 2020 the image is working to my personal satisfaction. However, please consider the current state as an alpha version with limited support. Please feel free to contribute or to provide a pull request :-)
 
 ## Getting Started
 
@@ -79,6 +80,12 @@ terraform show
 
 ### ... With Azure CLI Support
 
+**Please be aware** that by running the terraform configuration on a non-free account will result costs.
+
+You can create a [free azure account here](https://azure.microsoft.com/en-us/free/).
+
+In order for the setup to work you need to provide valid credentials to the container in the form of environment variables. Please follow the [Azure Provider: Authenticating using a Service Principal with a Client Secret](https://www.terraform.io/docs/providers/azurerm/guides/service_principal_client_secret.html) guide in order to obtain the values.
+
 ```sh
 # Use the following two commands to store AWS secrets in environment variables
 # without showing them to others watching your screen
@@ -123,6 +130,8 @@ terraform show
 ## References
 
 * HashiCorp: [Learn about provisioning infrastructure with HashiCorp Terraform](https://learn.hashicorp.com/terraform), last visited on Jan. 12, 2020.
+* HashiCorp: [Azure Provider: Authenticating using a Service Principal with a Client Secret](https://www.terraform.io/docs/providers/azurerm/guides/service_principal_client_secret.html), last visited on Jan. 20, 2020.
+* Amazon Web Services: [IAM Management Console](https://console.aws.amazon.com/iam/home?region=eu-central-1#/security_credentials), last visited on Jan. 20, 2020.
 * HashiCorp: [terraform Docker Container](https://hub.docker.com/r/hashicorp/terraform), Docker Hub, last visited on Jan. 11, 2020.
 * HashiCorp: [Terraform Configuration Language](https://www.terraform.io/docs/configuration/index.html), last visited on Jan. 11, 2020.
 * HashiCorp: [Learn about provisioning infrastructure with HashiCorp Terraform](https://learn.hashicorp.com/terraform), last visited on Jan. 12, 2020.
