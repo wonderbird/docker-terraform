@@ -1,6 +1,7 @@
 # Docker Terraform
 
-[![Docker Status](https://img.shields.io/docker/status/boos/terraform.svg)](https://hub.docker.com/repository/docker/boos/terraform)
+[![Docker Build](https://img.shields.io/docker/cloud/build/boos/terraform.svg)](https://hub.docker.com/repository/docker/boos/terraform)
+[![Docker Pulls](https://img.shields.io/docker/pulls/boos/terraform.svg)](https://hub.docker.com/repository/docker/boos/terraform)
 
 Docker image containing Terraform, AWS CLI, Azure CLI and Helm
 
