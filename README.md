@@ -53,6 +53,14 @@ echo -n "AWS secret access key: " && read -s AWS_SECRET_ACCESS_KEY
 export AWS_ACCESS_KEY_ID
 export AWS_SECRET_ACCESS_KEY
 
+echo
+echo "    AWS_ACCESS_KEY_ID = $AWS_ACCESS_KEY_ID"
+if [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
+    echo AWS_SECRET_ACCESS_KEY is empty
+else
+    echo "AWS_SECRET_ACCESS_KEY = <not printed here>"
+fi
+
 # Run the container. We assume that /your/working/directory contains your terraform configuration
 docker run -it --rm --name terra \
            -e "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
@@ -98,6 +106,16 @@ export ARM_CLIENT_ID
 export ARM_CLIENT_SECRET
 export ARM_SUBSCRIPTION_ID
 export ARM_TENANT_ID
+
+echo
+echo "      ARM_CLIENT_ID = $ARM_CLIENT_ID"
+if [ -z "$ARM_CLIENT_SECRET" ]; then
+    echo "  ARM_CLIENT_SECRET is empty"
+else
+    echo "  ARM_CLIENT_SECRET = <not printed here>"
+fi
+echo "ARM_SUBSCRIPTION_ID = $ARM_SUBSCRIPTION_ID"
+echo "      ARM_TENANT_ID = $ARM_TENANT_ID"
 
 # Run the container
 docker run -it --rm --name terra \
