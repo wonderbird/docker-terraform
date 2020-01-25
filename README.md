@@ -145,10 +145,21 @@ terraform apply localplan
 terraform show
 ```
 
+## Installing kubectl
+
+### ... for Azure CLI
+
+In the running docker container execute the following command to install `kubectl`:
+
+```sh
+az aks install-cli
+```
+
 ## References
 
 * HashiCorp: [Learn about provisioning infrastructure with HashiCorp Terraform](https://learn.hashicorp.com/terraform), last visited on Jan. 12, 2020.
 * HashiCorp: [Azure Provider: Authenticating using a Service Principal with a Client Secret](https://www.terraform.io/docs/providers/azurerm/guides/service_principal_client_secret.html), last visited on Jan. 20, 2020.
+* HashiCorp: [AWS EKS Introduction](https://learn.hashicorp.com/terraform/aws/eks-intro), last visited on Jan. 25, 2020.
 * Amazon Web Services: [IAM Management Console](https://console.aws.amazon.com/iam/home?region=eu-central-1#/security_credentials), last visited on Jan. 20, 2020.
 * HashiCorp: [terraform Docker Container](https://hub.docker.com/r/hashicorp/terraform), Docker Hub, last visited on Jan. 11, 2020.
 * HashiCorp: [Terraform Configuration Language](https://www.terraform.io/docs/configuration/index.html), last visited on Jan. 11, 2020.
