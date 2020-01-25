@@ -17,6 +17,7 @@ LABEL maintainer="Stefan.Boos@gmx.de"
 # If building the azure-cli fails, then check whether the Dockerfile on github now requires
 # a different JP_VERSION
 # https://github.com/Azure/azure-cli/blob/dev/Dockerfile
+# (latest modification date of the Dockerfile above: Jan. 2, 2020)
 ARG JP_VERSION="0.1.3"
 
 # This hack is widely applied to avoid python printing issues in docker containers.
@@ -69,16 +70,6 @@ RUN rm -rf /azure-cli && \
     rm -rf /root/.cache
 
 #### End of azure-cli installation specifics
-
-#### Install helm
-# https://helm.sh/docs/intro/install/
-RUN echo "**** install azure cli ****" \
-    && curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 \
-    && chmod 700 get_helm.sh \
-    && ./get_helm.sh \
-    && rm ./get_helm.sh \
-    && helm repo add stable https://kubernetes-charts.storage.googleapis.com/
-#### End of helm installation
 
 # docker-entrypoint.sh will execute the bash instead of terraform
 COPY docker-entrypoint.sh /usr/local/bin
