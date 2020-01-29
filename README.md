@@ -36,6 +36,35 @@ docker push boos/terraform
 
 ## Running the Container
 
+### ... with Docker Desktop Kubernetes Support
+```sh
+# Use the following two command to forward you local .kube
+# directory to the home directory in the container
+
+# Run the container.
+# Forward your ~/.kube directory to the /root/.kube directory in the container
+# We assume that /your/working/directory contains your terraform configuration
+docker run -it --rm --name terra \
+           -v ${HOME}/.kube:/root/.kube
+           -v /your/working/directory:/root/work
+           boos/terraform
+
+# Inside the container cd to the directory containing your terraform configuration
+cd /root/work
+
+# ... if this is the first time you run terraform, initialize terraform. Do this only, if you don't have a terraform.tfstate file in the current directory.
+terraform init
+
+# ... check the planned changes
+terraform plan
+
+# ... if you like the changes, then apply them
+terraform apply
+
+# ... check the results
+terraform show
+```
+
 ### ... With AWS CLI Support
 
 **Please be aware** that by running the terraform configuration on a non-free account will result costs.

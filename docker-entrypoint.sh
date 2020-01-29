@@ -12,8 +12,20 @@ _is_sourced() {
 		&& [ "${FUNCNAME[1]}" = 'source' ]
 }
 
+_install_terraform_autocomplete() {
+	# Use logical combination to prevent the shell from exiting if the grep
+	# command does not find "terraform" in .bashrc
+    grep terraform /root/.bashrc >/dev/null || \
+		( \
+			echo Installing terraform autocomplete && \
+	    	terraform -install-autocomplete \
+		)
+}
+
 _main() {
-    # Run terraform with arguments received by CMD
+	_install_terraform_autocomplete
+
+	# Run terraform with arguments received by CMD
     exec "$@"
 }
 

@@ -3,6 +3,9 @@ FROM hashicorp/terraform:light
 LABEL maintainer="Stefan.Boos@gmx.de"
 
 #####
+# The kubectl installation has been adopted from
+# https://kubernetes.io/docs/tasks/tools/install-kubectl/
+
 # The python installation has been adopted from
 # https://github.com/Docker-Hub-frolvlad/docker-alpine-python3/blob/master/Dockerfile
 
@@ -24,7 +27,15 @@ ARG JP_VERSION="0.1.3"
 # See: https://github.com/Docker-Hub-frolvlad/docker-alpine-python3/pull/13
 ENV PYTHONUNBUFFERED=1
 
-RUN echo "**** install Python ****" && \
+RUN echo "**** install kubectl ****" && \
+    apk add --no-cache curl && \
+    KUBECTL_VERSION=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt) && \
+    echo "Downloading kubectl version $KUBECTL_VERSION" && \
+    curl -# -o ./kubectl -L "https://storage.googleapis.com/kubernetes-release/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl" && \
+    chmod +x ./kubectl && \
+    mv ./kubectl /usr/local/bin/kubectl && \
+    \
+    echo "**** install Python ****" && \
     apk add --no-cache python3 && \
     if [ ! -e /usr/bin/python ]; then ln -sf python3 /usr/bin/python ; fi && \
     \
@@ -41,12 +52,11 @@ RUN echo "**** install Python ****" && \
     \
     echo "**** install azure cli ****" && \
     apk add --no-cache python3-dev && \
-    apk add --no-cache bash openssh ca-certificates jq curl openssl git zip && \
+    apk add --no-cache bash openssh ca-certificates jq openssl git zip && \
     apk add --no-cache --virtual .build-deps gcc make openssl-dev libffi-dev musl-dev linux-headers && \
     apk add --no-cache libintl icu-libs libc6-compat && \
     update-ca-certificates && \
     git clone https://github.com/Azure/azure-cli.git /azure-cli
-
 
 RUN curl -L https://github.com/jmespath/jp/releases/download/${JP_VERSION}/jp-linux-amd64 -o /usr/local/bin/jp \
  && chmod +x /usr/local/bin/jp \
